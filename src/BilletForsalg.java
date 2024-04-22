@@ -23,7 +23,7 @@ public class BilletForsalg implements Billet {
         //alm forsalgspris mere end 10 dage til 102 kr.
 
         if(dageTilEvent >= 10){
-            if(studiekortID <= 0) {
+            if(studiekortID == 0) {
                 billetType = "Standardbillet-forsalg-early bird";
                 billetPris = 102.00;
             } else {
@@ -31,7 +31,7 @@ public class BilletForsalg implements Billet {
                 billetPris = 76.50;
             }
         } else {
-            if(studiekortID > 0) {
+            if(studiekortID == 0) {
                 billetType = "Standardbillet-forsalg";
                 billetPris = 120.00;
             } else {
@@ -49,6 +49,10 @@ public class BilletForsalg implements Billet {
 
     public String getBilletType() {
         return billetType;
+    }
+
+    public void setBilletType(String billetType) {
+        this.billetType = billetType;
     }
 
     public double getBilletPris() {
@@ -75,9 +79,23 @@ public class BilletForsalg implements Billet {
         this.dageTilEvent = dageTilEvent;
     }
 
+    public int getBilletID() {
+        return billetID;
+    }
+
+    public void setBilletID(int billetID) {
+        this.billetID = billetID;
+    }
+
     @Override
     public String toString() {
-        return "BilletID: " + billetID + " ,BilletType: " + billetType + ", StudiekortID: " +studiekortID + ", Pris:" + billetPris + " kr.";
+        return "BilletID: " + billetID + ", BilletType: " + billetType + ", StudiekortID: " +studiekortID + ", Pris:" + billetPris + " kr.";
+    }
+
+    public String toStringBillet() {
+        String result = "";
+        result += "BilletType: " + billetType + "\n" + "Pris:" + billetPris + " kr." + "\n" + "StudiekortID: " +studiekortID;
+        return result;
     }
 }
 

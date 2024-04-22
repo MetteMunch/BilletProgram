@@ -1,7 +1,8 @@
 public class BilletIDøren implements Billet {
     private final String billetType = "Standard billet - døren";
-    private int billetPris = 150;
+    private int billetPris;
     private int billetID;
+    private int studiekortID = 0;
     private static int nextBilletID = 100;//statisk sammentællingsvariabel så billetID bliver unik (fortløbende)
 
 
@@ -9,6 +10,7 @@ public class BilletIDøren implements Billet {
     //Constructor
     public BilletIDøren(){
         this.billetID = nextBilletID++;
+        billetPris = 150;
     }
 
 
@@ -21,10 +23,27 @@ public class BilletIDøren implements Billet {
     public void udskrivBillet() {
 
     }
+    public double getBilletPris() {
+        return billetPris;
+    }
+
+    @Override
+    public int getStudiekortID() {
+        return getStudiekortID();
+    }
+
+    @Override
+    public int getBilletID() {
+        return billetID;
+    }
 
     @Override
     public String toString() {
         return  "BilletID: " + billetID + " ,BilletType: " + billetType + ", billetPris:" + billetPris + " kr.";
+    }
+
+    public String toStringBillet() {
+        return "BilletType: " + billetType + "\n" + "Pris:" + billetPris + " kr." + "\n" + "StudiekortID: ";
     }
 }
 

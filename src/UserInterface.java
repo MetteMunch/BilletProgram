@@ -35,11 +35,11 @@ public class UserInterface {
             switch (userInput){
                 case 1: {
                     printSamletListe();
+                    salgFordeltPåType();
                     break;
                 }
                 case 2: {
-                    System.out.println("her kommer forespørgsel på pris");
-                    //prisForespørgsel();
+                    prisForespørgsel();
                     break;
                 }
                 case 3: {
@@ -48,8 +48,7 @@ public class UserInterface {
                     break;
                 }
                 case 4: {
-                    System.out.println("Her kommer udskrift af billet");
-                    //udskrivBillet();
+                    printBillet();
                     break;
                 }
                 case 5: {
@@ -77,11 +76,42 @@ public class UserInterface {
         }
     }
 
-    public void prisForespørgsel(int dageTilEvent, int studiekortID){
+    public void printBillet(){
+        System.out.println("Angiv billetID på billetten, som skal udprintes: ");
+        int billetID = sc.nextInt();
 
+        for(Billet billetter : sb.getSolgteBilletter()){
+            if(billetter instanceof BilletForsalg && billetID==billetter.getBilletID()) {
+                System.out.println(billetter.toStringBillet());
+                if(billetter.getStudiekortID()!=0){
+                    System.out.println("Husk at medbringe dit studiekort sammen med billetten.");
+                }
+            }
+
+        }
     }
 
+    public void salgFordeltPåType() {
+        int solgteIForsalg = sb.antalSolgteIForsalg();
+        int solgteIDøren = sb.antalSolgteIDøren();
+        System.out.println(" ");
+        System.out.println("Der er samlet solgt: " + solgteIForsalg + " billetter i forsalg.");
+        System.out.println("Der er samlet solgt: " + solgteIDøren + " billetter i døren.");
+    }
 
+    public void prisForespørgsel(){
+        System.out.println("Hvor mange dage er der til event start?");
+        int dageTilEvent = sc.nextInt();
+        System.out.println("Angiv studiekort nummer eller 0, hvis ikke studerende?");
+        int studiekortID = sc.nextInt();
 
+        double pris = sb.prisForespørgsel(dageTilEvent,studiekortID);
+        if(pris != -1){
+            System.out.println("Prisen for billetten er: " +pris + " kr.");
+        } else {
+            System.out.println("Ugyldig forespørgsel");
+        }
+
+    }
 
 }

@@ -4,6 +4,7 @@ public class SolgteBilletter {
     //Attributter
     private final ArrayList<Billet> solgteBilletter;
 
+
     //Constructor
     public SolgteBilletter() {
         solgteBilletter = new ArrayList<>();
@@ -36,8 +37,37 @@ public class SolgteBilletter {
         //skal være sorteret med mindste nummer først
     }
 
+    public double prisForespørgsel (int dageTilEvent,int studiekortID){
+        Billet billet = new BilletForsalg(dageTilEvent,studiekortID);
+        billet.beregnBilletPris();
+        return billet.getBilletPris();
+    }
+
+    public int antalSolgteIForsalg() {
+        int result = 0;
+        for(Billet billettype : solgteBilletter){
+            if(billettype instanceof BilletForsalg){
+                result++;
+            }
+        } return result;
+
+    }
+
+    public int antalSolgteIDøren() {
+        int result = 0;
+        for(Billet billettype : solgteBilletter){
+            if(billettype instanceof BilletIDøren){
+                result++;
+            }
+        } return result;
+
+    }
+
     public ArrayList<Billet> getSolgteBilletter() {
         return solgteBilletter;
     }
+
+
+
 
 }
